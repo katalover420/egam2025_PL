@@ -23,7 +23,8 @@ public class SwordPhysics : MonoBehaviour
     public UIScriptGameOver gameOver;
     public int scoreValue = 1;
     public CameraShake shake;
-    
+    [SerializeField] private AudioClip destroySoundClip;
+
 
 
     // Start is called before the first frame update
@@ -122,7 +123,8 @@ public class SwordPhysics : MonoBehaviour
         {
             //FindObjectOfType<HitStop>().Stop(0.1f);
             shake.StartShake();
-            
+            AudioSource.PlayClipAtPoint(destroySoundClip, transform.position, 1f);
+
 
 
         }
