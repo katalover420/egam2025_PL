@@ -23,15 +23,17 @@ public class Timer : MonoBehaviour
     {
         if (winStateUi.activeSelf == true)
         {
-            remainingTime = Time.deltaTime;
+            Time.timeScale = 0;
         }
 
         else if (remainingTime > 0)
         {
+            Time.timeScale = 1.0f;
             remainingTime -= Time.deltaTime;
         }
         else if (remainingTime < 0)
         {
+            Time.timeScale = 1.0f;
             remainingTime = 0;
             gameOverUI.SetActive(true);
             

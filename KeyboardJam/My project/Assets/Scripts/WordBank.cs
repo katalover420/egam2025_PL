@@ -8,7 +8,7 @@ public class WordBank : MonoBehaviour
     
     private List<string> originalWords = new List<string>()
     {
-        "compassion mercy and love!", "oh goddess of mercy hear my prayer!", "please grant us a bountiful harvest!", "i love you goddess of mercy!", "compassion and kindness!", "i love you!", "you are so beautiful!", "compassion and love!", "mercy and kindess!", "you are so compassionate!", "your kindess is astounding!", "oh great goddess of mercy!", "grant us good health and wealth!", "kindess conquers all!", "thank you for your mercy!", "thank you o great goddess of mercy!"
+        "compassion mercy and love!", "oh goddess of mercy hear my prayer!", "please grant us a bountiful harvest!", "i love you goddess of mercy!", "compassion and kindness!", "i love you!", "you are so beautiful!", "compassion and love!", "mercy and kindness!", "you are so compassionate!", "your kindness is astounding!", "oh great goddess of mercy!", "grant us good health and wealth!", "kindness conquers all!", "thank you for your mercy!", "thank you oh great goddess of mercy!"
     };
     private List<string> workingWords = new List<string>();
 
