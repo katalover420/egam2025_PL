@@ -16,7 +16,7 @@ public class spawner : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time > 1)
+        if (time > 1.5)
         {
             Instantiate(pieces[UnityEngine.Random.Range(0, 5)]);
             time = 0;

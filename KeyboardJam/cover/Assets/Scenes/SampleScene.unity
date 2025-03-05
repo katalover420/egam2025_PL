@@ -4804,7 +4804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.6646729, y: 0}
+  m_AnchoredPosition: {x: -2.6645508, y: 0}
   m_SizeDelta: {x: 5.3293, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074735253
@@ -5111,6 +5111,9 @@ MonoBehaviour:
   position: 1
   ishit: 0
   scoreScript: {fileID: 313064708}
+  locked: 0
+  otherlock: 0
+  doorScript: {fileID: 1138666488}
 --- !u!95 &2099618890
 Animator:
   serializedVersion: 5
