@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     }
     public void play()
     {
-       SceneManager.LoadScene("SampleScene");
+       SceneManager.LoadScene("keyboardlevel");
     }
 
     public void title()
