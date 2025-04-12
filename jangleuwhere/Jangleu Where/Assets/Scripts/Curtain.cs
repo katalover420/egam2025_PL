@@ -1,31 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Random = UnityEngine.Random;
 
 public class Curtain : MonoBehaviour
 {
-    public bool gamenext;
+    //public bool gamenext;
+    bool stopTime;
 
     public Animator animator;
     public List<string> SceneNames;
     public List<string> ScenesPlayed;
-   // public List<int> availableScenes;
-    //public List<int> playedScenes;
-    // Start is called before the first frame update
+    public float gameTimer = 100;
+    public int seconds;
+    public bool costart;
+    public TMP_Text timerText;
+
+    public int gamesWon;
+    public TMP_Text scoreText;
+
+
+  
     void Start()
     {
         DontDestroyOnLoad(this);
-        gamenext = false;
+        stopTime = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gamenext == true)
+        if (costart == true)
         {
-            StartCoroutine(CurtainLowerRoutine());
+            gameTimer -= Time.deltaTime;
+            seconds = (int)(gameTimer);
         }
+        scoreText.text = gamesWon.ToString();
+
+        if (gameTimer <= 0)
+        {
+            stopTime = true;
+        }
+        if (stopTime == false)
+        {
+            timerText.text = seconds.ToString();
+        }
+
+        // if (StartCoroutine(CurtainLowerRoutine()))
         if (SceneNames.Count <= 0)
         {
             SceneNames = ScenesPlayed;
@@ -60,9 +84,10 @@ public class Curtain : MonoBehaviour
     }
     public IEnumerator CurtainLowerRoutine()
     {
-        gamenext = false;
+
+        costart = true;
         animator.SetBool("gameend", true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         LoadRandomScene();
         
         animator.SetBool("gameend", false);

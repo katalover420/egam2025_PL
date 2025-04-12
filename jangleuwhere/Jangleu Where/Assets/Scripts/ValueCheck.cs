@@ -9,6 +9,7 @@ public class ValueCheck : MonoBehaviour
     public Slider leucisSlide;
     public Slider rajangSlide;
     public GameObject curtain;
+    bool wincheck;
     //public Curtain curtainScript;
 
     public float gameTime;
@@ -19,6 +20,7 @@ public class ValueCheck : MonoBehaviour
         curtain = GameObject.Find("Trans");
         //curtainScript = GetComponent(Curtain)
         stopTime = false;
+        wincheck = false;
         timerSlider.maxValue = gameTime;
         timerSlider.value = gameTime;
     }
@@ -26,11 +28,10 @@ public class ValueCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = gameTime - Time.time;
+        float time = gameTime -= Time.deltaTime;
         if (leucisSlide.value == 1 && rajangSlide.value == 1)
         {
-            StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
-            //curtainScript.gamenext = true;
+            wingame();
         }
 
         if (gameTime <= 0)
@@ -41,5 +42,17 @@ public class ValueCheck : MonoBehaviour
         {
             timerSlider.value = time;
         }
+    }
+
+    void wingame()
+    {
+         
+            curtain.GetComponent<Curtain>().gamesWon ++;
+            StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+            leucisSlide.value = 0.99999f;
+
+
+            
+        
     }
 }
