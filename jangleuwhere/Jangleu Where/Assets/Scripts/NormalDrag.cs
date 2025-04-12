@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-
-public class Drag : MonoBehaviour
+public class NormalDrag : MonoBehaviour
 {
     bool MoveRestricted = false;
     private Vector3 screenPoint;
     private Vector3 offset;
+    public GameObject curtain;
+
+    private void Start()
+    {
+        curtain = GameObject.Find("Trans");
+    }
+
+    private void Update()
+    {
+        
+    }
 
     void OnMouseDown()
     {
@@ -23,7 +32,7 @@ public class Drag : MonoBehaviour
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        curPosition.y = 0;
+        //curPosition.y = 0;
         transform.position = curPosition;
 
     }
@@ -32,6 +41,23 @@ public class Drag : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hi");
+
+        if (other.gameObject.CompareTag("win"))
+        {
+            Debug.Log("Win!");
+            wingame();
+        }
     }
 
+    void wingame()
+    {
+
+        curtain.GetComponent<Curtain>().gamesWon++;
+        StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+        //Destroy(GameObject.FindWithTag("win"));
+
+
+
+
+    }
 }
