@@ -32,11 +32,13 @@ public class ValueCheck : MonoBehaviour
         if (leucisSlide.value == 1 && rajangSlide.value == 1)
         {
             wingame();
+            wincheck = true;
         }
 
-        if (gameTime <= 0)
+        if (gameTime <= 0 && wincheck == false)
         {
             stopTime = true;
+            losegame();
         }
         if (stopTime == false)
         {
@@ -54,5 +56,16 @@ public class ValueCheck : MonoBehaviour
 
             
         
+    }
+    void losegame()
+    {
+
+        
+        StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+       // leucisSlide.value = 0.99999f;
+
+
+
+
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Leucis
   - win
+  - lose
   layers:
   - Default
   - TransparentFX

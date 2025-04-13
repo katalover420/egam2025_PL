@@ -8,10 +8,12 @@ public class NormalDrag : MonoBehaviour
     private Vector3 screenPoint;
     private Vector3 offset;
     public GameObject curtain;
+    bool wincheck;
 
     private void Start()
     {
         curtain = GameObject.Find("Trans");
+        wincheck = false;
     }
 
     private void Update()
@@ -40,8 +42,13 @@ public class NormalDrag : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("hi");
+        
 
+        if (other.gameObject.CompareTag("lose"))
+        {
+            Debug.Log("you losere!");
+            losegame();
+        }
         if (other.gameObject.CompareTag("win"))
         {
             Debug.Log("Win!");
@@ -54,7 +61,22 @@ public class NormalDrag : MonoBehaviour
 
         curtain.GetComponent<Curtain>().gamesWon++;
         StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+        wincheck = true;
         //Destroy(GameObject.FindWithTag("win"));
+
+
+
+
+    }
+    void losegame()
+    {
+
+        if (wincheck == false)
+        {
+        StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+
+        }
+        // leucisSlide.value = 0.99999f;
 
 
 

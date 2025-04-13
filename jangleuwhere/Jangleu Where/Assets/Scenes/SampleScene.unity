@@ -364,6 +364,8 @@ MonoBehaviour:
   - 3
   - 4
   - 5
+  - 6
+  - 7
   ScenesPlayed: []
   gameTimer: 100
   seconds: 0
