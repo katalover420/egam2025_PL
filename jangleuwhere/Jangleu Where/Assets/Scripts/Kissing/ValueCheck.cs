@@ -10,6 +10,12 @@ public class ValueCheck : MonoBehaviour
     public Slider rajangSlide;
     public GameObject curtain;
     bool wincheck;
+    bool onoff;
+
+    public AudioSource correct;
+    public AudioClip correctsfx;
+    public AudioSource wrong;
+    public AudioClip wrongsfx;
     //public Curtain curtainScript;
 
     public float gameTime;
@@ -31,13 +37,21 @@ public class ValueCheck : MonoBehaviour
         float time = gameTime -= Time.deltaTime;
         if (leucisSlide.value == 1 && rajangSlide.value == 1)
         {
+            correct.clip = (correctsfx);
+            correct.Play();
+            stopTime = true;
             wingame();
             wincheck = true;
         }
 
-        if (gameTime <= 0 && wincheck == false)
+        if (gameTime <= 0 && stopTime == false && onoff == true && curtain.GetComponent<Curtain>().stopTimer == false)
         {
+            Debug.Log("timesup");
+            wrong.clip = (wrongsfx);
+            wrong.Play(); 
             stopTime = true;
+            curtain.GetComponent<Curtain>().health -= 25;
+            onoff = false;
             losegame();
         }
         if (stopTime == false)
@@ -60,9 +74,12 @@ public class ValueCheck : MonoBehaviour
     void losegame()
     {
 
-        
-        StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
-       // leucisSlide.value = 0.99999f;
+        if (wincheck == false && curtain.GetComponent<Curtain>().health > 0)
+        {
+            StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+
+        }
+        // leucisSlide.value = 0.99999f;
 
 
 

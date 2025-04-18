@@ -9,10 +9,15 @@ public class NormalDrag : MonoBehaviour
     private Vector3 offset;
     public GameObject curtain;
     bool wincheck;
-
+    public Timer timeScript;
+    public AudioSource correct;
+    public AudioClip correctsfx;
+    public AudioSource wrong;
+    public AudioClip wrongsfx;
     private void Start()
     {
         curtain = GameObject.Find("Trans");
+        
         wincheck = false;
     }
 
@@ -46,11 +51,19 @@ public class NormalDrag : MonoBehaviour
 
         if (other.gameObject.CompareTag("lose"))
         {
-            Debug.Log("you losere!");
+            wrong.clip = (wrongsfx);
+            wrong.Play();
+            timeScript.stopTime = true;
+            this.GetComponent<CircleCollider2D>().enabled = false;
+            Debug.Log("MazeLose");
+            curtain.GetComponent<Curtain>().health -= 25;
             losegame();
         }
         if (other.gameObject.CompareTag("win"))
         {
+            correct.clip = (correctsfx);
+            correct.Play();
+            timeScript.stopTime = true;
             Debug.Log("Win!");
             wingame();
         }
@@ -71,7 +84,7 @@ public class NormalDrag : MonoBehaviour
     void losegame()
     {
 
-        if (wincheck == false)
+        if (wincheck == false && curtain.GetComponent<Curtain>().health > 0)
         {
         StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
 

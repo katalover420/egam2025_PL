@@ -6,8 +6,12 @@ public class LoseClick : MonoBehaviour
 {
     public GameObject curtain;
     public bool overlap;
+    public Timer timeScript;
     
     public bool lose;
+    
+    public AudioSource wrong;
+    public AudioClip wrongsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +30,27 @@ public class LoseClick : MonoBehaviour
     {
         if (lose == true)
         {
-            Debug.Log("you lose!!!");
-            wingame();
+            wrong.clip = (wrongsfx);
+            wrong.Play();
+            timeScript.stopTime = true;
+            Debug.Log("waldoLose");
+            curtain.GetComponent<Curtain>().health -= 25;
+            losegame();
         }
 
     }
    
 
-    void wingame()
+    
+    void losegame()
     {
 
-        //curtain.GetComponent<Curtain>().gamesWon++;
-        StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
-        //Destroy(GameObject.FindWithTag("win"));
+        if (curtain.GetComponent<Curtain>().health > 0)
+        {
+            StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+
+        }
+        // leucisSlide.value = 0.99999f;
 
 
 

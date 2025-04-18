@@ -53,6 +53,11 @@ public class Lock : MonoBehaviour
             {
                 winScript.wincount += 1;
             }
+
+            if (winScript.overlap == false)
+            {
+                winScript.fail += 1;
+            }
             
 
 
@@ -87,4 +92,5 @@ public class Lock : MonoBehaviour
 
 
     }
+
 }

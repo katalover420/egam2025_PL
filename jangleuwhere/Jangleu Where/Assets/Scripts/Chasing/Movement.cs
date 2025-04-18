@@ -11,6 +11,11 @@ public class Movement : MonoBehaviour
     public float speed;
     public float maxDelay = 0.5f;
     public GameObject curtain;
+    public Timer timeScript;
+    public AudioSource correct;
+    public AudioClip correctsfx;
+    bool wincheck;
+    
 
     float mash;
     // Start is called before the first frame update
@@ -31,7 +36,7 @@ public class Movement : MonoBehaviour
             {
                 onpress = true;
                 mash = maxDelay;
-                transform.Translate(direction * speed * Time.deltaTime);
+                transform.Translate(direction * speed * Screen.width * Time.deltaTime);
                 onpress = false;
             }
             
@@ -40,8 +45,12 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Leucis"))
+        if (other.gameObject.CompareTag("Leucis") && wincheck == false)
         {
+            wincheck = true;
+            correct.clip = (correctsfx);
+            correct.Play();
+            timeScript.stopTime = true;
             Debug.Log("win");
             wingame();
         }

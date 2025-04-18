@@ -7,6 +7,15 @@ public class WinLock : MonoBehaviour
     public GameObject curtain;
     public bool overlap;
     public int wincount;
+    public int fail = 0;
+    public bool wincheck;
+    public Timer timeScript;
+    public AudioSource correct;
+    public AudioClip correctsfx;
+    public AudioSource wrong;
+    public AudioClip wrongsfx;
+    public bool wcheck;
+    //public bool wincheck;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +28,24 @@ public class WinLock : MonoBehaviour
     {
         if (wincount >= 3)
         {
+            wcheck = true;
+            timeScript.stopTime = true;
+            this.GetComponent<PolygonCollider2D>().enabled = false;
+            correct.clip = (correctsfx);
+            correct.Play();
             Debug.Log("win!");
             wingame();
+        }
+
+        if (fail >= 1 && wcheck == false)
+        {
+            timeScript.stopTime = true;
+            Debug.Log("LockLose");
+            wrong.clip = (wrongsfx);
+            wrong.Play();
+            curtain.GetComponent<Curtain>().health -= 25;
+            wcheck = true;
+            losegame();
         }
     }
 
@@ -30,6 +55,7 @@ public class WinLock : MonoBehaviour
         {
             overlap = true;
             Debug.Log("ovelaps");
+            wincheck = true;
 
         }
     }
@@ -44,6 +70,20 @@ public class WinLock : MonoBehaviour
         curtain.GetComponent<Curtain>().gamesWon++;
         StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
         wincount = 0;
+
+
+
+
+    }
+    void losegame()
+    {
+
+        if (wincheck == false && curtain.GetComponent<Curtain>().health > 0)
+        {
+            StartCoroutine(curtain.GetComponent<Curtain>().CurtainLowerRoutine());
+
+        }
+        // leucisSlide.value = 0.99999f;
 
 
 

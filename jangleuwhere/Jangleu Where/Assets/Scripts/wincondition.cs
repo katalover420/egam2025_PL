@@ -5,6 +5,9 @@ using UnityEngine;
 public class wincondition : MonoBehaviour
 {
     public GameObject curtain;
+    public Timer timeScript;
+    public AudioSource correct;
+    public AudioClip correctsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,9 @@ public class wincondition : MonoBehaviour
     {
         if (other.gameObject.CompareTag("win"))
         {
+            correct.clip = (correctsfx);
+            correct.Play();
+            timeScript.stopTime = true;
             Debug.Log("win!");
             wingame();
         }

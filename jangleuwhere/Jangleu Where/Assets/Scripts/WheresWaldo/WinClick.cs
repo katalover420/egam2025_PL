@@ -7,8 +7,10 @@ public class WinClick : MonoBehaviour
 {
     public GameObject curtain;
     public bool overlap;
-    
+    public Timer timeScript;
     public bool lose;
+    public AudioSource correct;
+    public AudioClip correctsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,32 +28,16 @@ public class WinClick : MonoBehaviour
     {
         if (overlap == true)
         {
+            correct.clip = (correctsfx);
+            correct.Play();
+            timeScript.stopTime = true;
             Debug.Log("you win!");
             wingame();
         }
         
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("win"))
-        {
-            overlap = true;
-            Debug.Log("ovelaps");
-
-        }
-        if (other.gameObject.CompareTag("lose"))
-        {
-            lose = true;
-            Debug.Log("loser!");
-
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        overlap = false;
-        lose = false;
-    }
-
+    
+    
     void wingame()
     {
 
@@ -67,6 +53,6 @@ public class WinClick : MonoBehaviour
     private void OnMouseOver()
     {
         overlap = true;
-        Debug.Log("ovelaps");
+        //Debug.Log("ovelaps");
     }
 }
