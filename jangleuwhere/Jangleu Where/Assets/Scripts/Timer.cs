@@ -41,6 +41,11 @@ public class Timer : MonoBehaviour
         {
             timerSlider.value = time;
         }
+
+        if (curtain.GetComponent<Curtain>().wincheck == true)
+        {
+            stopTime = true;
+        }
     }
 
     void losegame()

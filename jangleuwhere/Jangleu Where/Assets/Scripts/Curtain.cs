@@ -33,6 +33,12 @@ public class Curtain : MonoBehaviour
     public GameObject loseUI;
 
     public GameObject fasterone;
+    public GameObject fastertwo;
+    bool speedcheck1;
+    bool speedcheck2;
+    public bool wincheck;
+
+
 
 
   
@@ -42,6 +48,8 @@ public class Curtain : MonoBehaviour
         maxHealth = health;
         DontDestroyOnLoad(this);
         stopTimer = false;
+        speedcheck1 = false;
+        speedcheck2 = false;
     }
 
     // Update is called once per frame
@@ -59,13 +67,26 @@ public class Curtain : MonoBehaviour
             Time.timeScale = 1f;
         }
 
-        if (gamesWon >= 5)
+        if (gamesWon >= 5 && speedcheck1 == false)
         {
-            Time.timeScale = 1.3f;
+            
             StartCoroutine(Faster());
+            speedcheck1 = true;
         }
 
-        if (gamesWon >= 10)
+        if (gamesWon >= 10 && speedcheck2 == false)
+        {
+            //Time.timeScale = 1.6f;
+            StartCoroutine(EvenFaster());
+           speedcheck2 = true;
+        }
+
+        if (speedcheck1 == true)
+        {
+            Time.timeScale = 1.3f;
+        }
+
+        if (speedcheck2 == true)
         {
             Time.timeScale = 1.6f;
         }
@@ -173,6 +194,7 @@ public class Curtain : MonoBehaviour
     {
 
         costart = false;
+        wincheck = true;
         animator.SetBool("gameend", true);
         winUI.SetActive(true);
 
@@ -186,5 +208,12 @@ public class Curtain : MonoBehaviour
         fasterone.SetActive(true);
         yield return new WaitForSeconds(4);
         fasterone.SetActive(false);
+    }
+
+    public IEnumerator EvenFaster()
+    {
+        fastertwo.SetActive(true);
+        yield return new WaitForSeconds(4);
+        fastertwo.SetActive(false);
     }
 }

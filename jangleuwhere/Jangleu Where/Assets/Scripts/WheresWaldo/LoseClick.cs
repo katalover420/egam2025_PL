@@ -28,7 +28,7 @@ public class LoseClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (lose == true)
+        if (lose == true )
         {
             wrong.clip = (wrongsfx);
             wrong.Play();
@@ -60,6 +60,6 @@ public class LoseClick : MonoBehaviour
     private void OnMouseOver()
     {
         lose = true;
-        Debug.Log("loser!");
+       // Debug.Log("loser!");
     }
 }
