@@ -38,6 +38,8 @@ public class Curtain : MonoBehaviour
     bool speedcheck2;
     public bool wincheck;
 
+    public GameObject tutorialScreen;
+
 
 
 
@@ -103,7 +105,7 @@ public class Curtain : MonoBehaviour
             StartCoroutine(CurtainWinRoutine());
         }
 
-        if (gameTimer <= 0)
+        if (gameTimer <= 0 && health >= 1)
         {
             
             stopTimer = true;
@@ -215,5 +217,15 @@ public class Curtain : MonoBehaviour
         fastertwo.SetActive(true);
         yield return new WaitForSeconds(4);
         fastertwo.SetActive(false);
+    }
+
+    public void Tutorial()
+    {
+        tutorialScreen.SetActive(true);
+    }
+
+    public void ExitTutorial()
+    {
+        tutorialScreen.SetActive(false);
     }
 }
