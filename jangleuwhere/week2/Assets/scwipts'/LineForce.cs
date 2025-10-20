@@ -25,6 +25,10 @@ public class LineForce : MonoBehaviour
     public float speedBoost = 1f;
     public int totalStrokes;
     public TextMeshProUGUI resultStrokes;
+    public TextMeshProUGUI flowersCollected;
+    public int totalScore;
+    public int finalScore;
+    public GameObject spawn1;
 
     private void Awake()
     {
@@ -32,19 +36,17 @@ public class LineForce : MonoBehaviour
         meshRenderer.material = material0;
         isAiming = false;
         lineRenderer.enabled = false;
+
     }
     private void Update()
     {
-        if (rigidbody.velocity.magnitude < stopVelocity)
+        if (rigidbody.linearVelocity.magnitude < stopVelocity)
         {
             Stop();
         }
         ProcessAim();
 
-        if (isIdle == true &&  winScreen.activeSelf == false && strokes <= 0)
-        {
-            loseScreen.SetActive(true);
-        }
+        
 
         if (seedCount == seedRequirement)
         {
@@ -63,7 +65,7 @@ public class LineForce : MonoBehaviour
 
     private void Stop()
     {
-        rigidbody.velocity = Vector3.zero;
+        rigidbody.linearVelocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
         isIdle = true;
     }
@@ -102,7 +104,7 @@ public class LineForce : MonoBehaviour
         rigidbody.AddForce(-direction * strength * shotPower);
         isIdle = false;
 
-        strokes--;
+        strokes++;
         totalStrokes++;
 
         resultStrokes.text = totalStrokes.ToString();
@@ -128,6 +130,7 @@ public class LineForce : MonoBehaviour
         if (other.CompareTag("seed"))
         {
             seedCount += 1;
+            flowersCollected.text = seedCount.ToString();
         }
         
     }
@@ -160,6 +163,18 @@ public class LineForce : MonoBehaviour
             transform.position = originalPos;
             Stop();
         }
+    }
+
+    public void HoleTwo()
+    {
+        //rigidbody.position = spawn1.transform.position;
+        //strokes = 0;
+        //totalScore = totalStrokes;
+        //totalStrokes = 0;
+        //seedCount = 0;
+        //holeCover.SetActive(true);
+        //winScreen.SetActive(false);
+
     }
 
     

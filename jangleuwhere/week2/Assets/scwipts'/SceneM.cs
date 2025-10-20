@@ -16,13 +16,18 @@ public class SceneM : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    public void Restart()
+    public void Next()
+    {
+        SceneManager.LoadScene("level2");
+        
+    }
+
+    public void one()
     {
         SceneManager.LoadScene("SampleScene");
-        
     }
 }
